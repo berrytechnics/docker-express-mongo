@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "node src/server.js",
-    "build": "docker-compose build && docker-compose up"
+    "build": "docker image prune --force && docker-compose build && docker-compose up"
   },
   "dependencies": {
     "express": "^4.16.3",

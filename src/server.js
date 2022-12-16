@@ -13,7 +13,7 @@ app.get('/test',async(req,res,next)=>{
         await TestController.delete(read._id)
         res.send(JSON.stringify({
             "init":entry,
-            "update":read,
+            "update":update,
             "deleted":true
         }))
     }
