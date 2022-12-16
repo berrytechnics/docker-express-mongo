@@ -1,15 +1,26 @@
 import express from 'express'
-import mongoose from 'mongoose'
-
+import { TestController } from './controllers.js'
 const app = express()
 
-mongoose.set('strictQuery',true)
-mongoose.connect(process.env.MONGO_URI).catch(e=>console.error(e))
-
-const db = mongoose.connection
-db.once('open',()=>console.info('Database connected...'))
-
 app.get('/',(req,res)=>res.sendStatus(200))
+
+app.get('/test',async(req,res,next)=>{
+    try{
+        const entry = await TestController.create('One')
+        const read = await TestController.read(entry._id)
+        read.name = 'Two'
+        const update = await TestController.update(read)
+        await TestController.delete(read._id)
+        res.send(JSON.stringify({
+            "init":entry,
+            "update":read,
+            "deleted":true
+        }))
+    }
+    catch(e){
+        next(e)
+    }
+})
 
 app.use((err, req, res, next) => {
     console.error(err.stack)

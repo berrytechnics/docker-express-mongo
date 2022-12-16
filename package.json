@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "node src/server.js",
-    "build": "npm install && docker-compose build"
+    "build": "docker-compose build && docker-compose up"
   },
   "dependencies": {
     "express": "^4.16.3",
