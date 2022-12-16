@@ -5,6 +5,7 @@ const app = express()
 
 mongoose.set('strictQuery',true)
 mongoose.connect(process.env.MONGO_URI).catch(e=>console.error(e))
+
 const db = mongoose.connection
 db.once('open',()=>console.info('Database connected...'))
 
